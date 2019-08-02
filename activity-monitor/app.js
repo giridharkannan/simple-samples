@@ -3,23 +3,8 @@ const path = require('path')
 const url = require('url')
 const electron = require('electron');
 const fs = require('fs');
-const LOG_PATH = electron.app.getPath('userData');
-
-let fd = fs.openSync(LOG_PATH + '/grr', 'w');
-
-function write(data) {
-    data = data + '\r\n';
-    let buff = new Buffer(data, 'binary');
-    fs.writeSync(fd, buff, 0, buff.length, null);
-}
 
 
-process.on('uncaughtException', (err) => {
-    write('got uncaught exception');
-    write(err.stack);
-});
-
-write('came in ');
 let window = null
 
 // Wait until the app is ready
